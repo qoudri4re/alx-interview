@@ -12,7 +12,6 @@ def island_perimeter(grid):
     for row in range(height):
         for col in range(width):
             if grid[row][col] == 1:
-                # count the number of neighboring cells that are water or out of bounds
                 num_neighbors = 0
                 if row == 0 or grid[row-1][col] == 0:
                     num_neighbors += 1
