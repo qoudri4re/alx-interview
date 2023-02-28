@@ -3,22 +3,24 @@
 
 
 def island_perimeter(grid):
-    """computes the perimeter of an island"""
-    perimter = 0
-    if type(grid) != list:
-        return 0
-    n = len(grid)
-    for i, row in enumerate(grid):
-        m = len(row)
-        for j, cell in enumerate(row):
-            if cell == 0:
-                continue
-            edges = (
-                    i == 0 or (len(grid[i-1]) > j and grid[i - 1][j] == 0),
-                    j == m - 1 or (m > j + 1 and row[j + 1] == 0),
-                    i == n - 1 or (len(grid[i + 1]) > j and
-                                   grid[i + 1][j] == 0),
-                    j == 0 or row[j - 1] == 0,
-                    )
-            perimeter += sum(edges)
+    """
+    Computes the perimeter of the island described in `grid`.
+    """
+    height = len(grid)
+    width = len(grid[0])
+    perimeter = 0
+    for row in range(height):
+        for col in range(width):
+            if grid[row][col] == 1:
+                # count the number of neighboring cells that are water or out of bounds
+                num_neighbors = 0
+                if row == 0 or grid[row-1][col] == 0:
+                    num_neighbors += 1
+                if row == height-1 or grid[row+1][col] == 0:
+                    num_neighbors += 1
+                if col == 0 or grid[row][col-1] == 0:
+                    num_neighbors += 1
+                if col == width-1 or grid[row][col+1] == 0:
+                    num_neighbors += 1
+                perimeter += num_neighbors
     return perimeter
